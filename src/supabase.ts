@@ -17,3 +17,4 @@ export const user = ref(data.user)
 supabase.auth.onAuthStateChange( (evt,session)=>{
     user.value = session?.user ?? null
 })
+
