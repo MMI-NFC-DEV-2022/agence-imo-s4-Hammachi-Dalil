@@ -12,6 +12,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/list-supabase">Liste-Supabase</RouterLink>
       <RouterLink to="/maisons">Maison</RouterLink>
       <RouterLink to="/connexion">Connexion</RouterLink>
+      <RouterLink to="/maisons/edit/1">Edit Maison</RouterLink>
     </nav>
   </header>
 
