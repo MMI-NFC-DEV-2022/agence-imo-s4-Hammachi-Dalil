@@ -8,6 +8,9 @@ let { data: data, error } = await supabase
     .from('Maison')
     .select('*');
 
+
+
+
 const tableauMaison = data ?? [];
 </script>
 
