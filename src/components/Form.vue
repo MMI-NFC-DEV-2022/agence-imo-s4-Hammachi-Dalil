@@ -38,9 +38,14 @@ if (route.params.id) {
                     },
                 }" 
 type="form" v-model="maison" @submit="upsertMaison">
-    <FormKit name="nomMaison" label="nom" type="text" />
-    <FormKit name="prix" label="prix" type="number"/>
+    <FormKit name="nomMaison" label="Nom" type="text" />
+    <FormKit name="prix" label="Prix" type="number"/>
     <FormKit name="favori" label="Mettre en valeur" type="checkbox" label-class="pl-2"/>
+    <FormKit name="nbrChambres" label="Nombre de chambres" type="number" label-class="pl-2"/>
+    <FormKit name="nbrSDB" label="Nombre de salle de bail" type="number" label-class="pl-2"/>
+    <FormKit name="adresse" label="Adresse" type="text" label-class="pl-2"/>
+    <FormKit name="surface" label="Surface" type="text" label-class="pl-2"/>
+
 </FormKit>
 </div>
 </template>

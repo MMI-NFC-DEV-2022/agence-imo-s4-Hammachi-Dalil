@@ -21,12 +21,16 @@ console.log("group :", group);
         {{ quartierObject.Nom }} -->
         <h1 class="font-bold mt-3vh text-purple-800">{{ NomCommune }}</h1>
         <ul>
-          <li class="ml-10" v-for="quartierObject in les_quartiers">
-            {{ quartierObject.NomQuartier }}
-            <RouterLink :to="{ name: '/quartier/edit/[[id]]', params: { id: quartierObject.id } }">
-              <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-4 rounded m-4">
+          <li class="m-4 justify-between" v-for="unQuartier in les_quartiers">
+
+            {{ unQuartier.NomQuartier }}
+            <RouterLink :to="{ name: '/quartier/edit/[[id]]', params: { id: unQuartier.quartier_id } }"
+            class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-4 rounded m-4">
                 Voir
-              </button> </RouterLink>
+           </RouterLink>
+           <RouterLink :to='{name:"/quartier/suppr/[[id]]", params:{id:unQuartier.quartier_id} }' class="text-white font-bold focus-style justify-self-end rounded-md bg-red-500 p-2 shadow-sm m-6 mt-5">
+                  Supprimer l'offre
+              </RouterLink>
           </li>
         </ul>
       </li>

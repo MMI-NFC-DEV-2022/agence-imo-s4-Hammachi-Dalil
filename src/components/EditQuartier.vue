@@ -5,6 +5,7 @@ import { useRouter, useRoute } from 'vue-router/auto';
 import { ref} from '@vue/reactivity';
 const router = useRouter();
 const quartier = ref({});
+const route = useRoute('/quartier/edit/[[id]]');
 
 async function upsertQuartier(dataForm, node) {
  const { data, error } = await supabase.from("Quartier").upsert(dataForm).select("id");
@@ -12,18 +13,37 @@ async function upsertQuartier(dataForm, node) {
  else{
     console.log("data :", data);}
     router.push({name:'/quartier/edit/[[id]]', params: {id: data[0].id}});
-}
+};
 
-const route = useRoute('/quartier/edit/[[id]]');
+
 if (route.params.id) {
-    // console.log("route.params.id :", route.params.id);
+     //console.log("route.params.id :", route.params.id);
     
     const { data, error } = await supabase.from("Quartier").select("*").eq("id", route.params.id).single();
-    console.log("data :", data);
+    //console.log("data :", data);
     
     if (error) console.error("error", error);
     else quartier.value = data;
-}
+};
+
+const { data: listeCommune, error } = await supabase
+    .from("Commune")
+    .select("");
+if (error) console.log("n'a pas pu charger la table Commune :", error);
+// Les convertir par map en un tableau d'objets {value, label} pour FormKit
+const optionsCommune = listeCommune?.map((commune) => ({
+    value: commune.id,
+    label: commune.Nom,
+}));
+
+const { data: listeMaison } = await supabase
+    .from("Maison")
+    .select("");
+// Les convertir par map en un tableau d'objets {value, label} pour FormKit
+const optionsMaison = listeMaison?.map((maison) => ({
+    value: maison.id,
+    label: maison.nomMaison,
+}));
 
 </script>
 
@@ -48,9 +68,11 @@ if (route.params.id) {
         v-model="quartier">
     <FormKit name="Nom" label="Nom du quartier" type="text" />
     <FormKit name="nombre_habitants" type="number" label="Nombre d'habitants"/>
-    <FormKit name="id_Commune" label="Id commune" type="number"/>
-
+    <FormKit name="maisons" label="maison du quartier" type="select" :options="optionsMaison" />
+    <FormKit name="id_Commune" label="commune du quartier" type="select" :options="optionsCommune" />                
 </FormKit>
+
+
 </div>
 
 </template>
